@@ -1,12 +1,21 @@
 const express = require('express');
 const app = express()
-const cors = requires('cors');
+const cors = require('cors');
 const bodyparser = require('body-parser');
 
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 8000;
 
-app.use(cors())
-app.use(bodyparser())
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions));
+app.use(bodyparser.json());
+
+app.get('/api/message', (req,res) => {
+    res.send("Hello World! :D")
+})
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`)
